@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProfileCard from "./ProfileCard.jsx";
+import Counter from "./Counter.jsx";
 
 const exercises = [
   {
@@ -102,6 +103,15 @@ function App() {
               name="Misio Patysio"
               bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porta justo et lorem cursus."
             />
+          </div>
+
+          <div className="playground">
+            <h3>Example solution for exercise 3</h3>
+            <p>
+              This counter increases by 3 every time you click the button. The
+              increment value is passed as a <code>step</code> prop.
+            </p>
+            <Counter step={3} />
           </div>
 
           <div className="tips">
