@@ -173,6 +173,26 @@ body {
   color: #e5e7eb;
 }
 
+.profile-card {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.75);
+}
+
+.profile-card h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+
+.profile-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
 .footer {
   margin-top: 1.8rem;
   text-align: center;

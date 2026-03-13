@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ProfileCard from "./ProfileCard.jsx";
 
 const exercises = [
   {
@@ -84,6 +85,23 @@ function App() {
               Try to implement the exercise description using React concepts: JSX,
               props, state, events, and conditional rendering.
             </p>
+          </div>
+
+          <div className="playground">
+            <h3>Example solution for exercise 1</h3>
+            <p>
+              Below is a simple component that prints a name and a short bio. You
+              can edit <code>src/App.jsx</code> or pass different props to{" "}
+              <code>ProfileCard</code> to customize it with your own data.
+            </p>
+            <ProfileCard
+              name="John Doe"
+              bio="I am learning React step by step, starting from components and JSX."
+            />
+            <ProfileCard
+              name="Misio Patysio"
+              bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porta justo et lorem cursus."
+            />
           </div>
 
           <div className="tips">
