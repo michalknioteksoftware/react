@@ -5,6 +5,7 @@ import MovieList from "./components/MovieList.jsx";
 import MovieRatingsChart from "./components/MovieRatingsChart.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
+import RotatingCube from "./components/RotatingCube.jsx"
 
 function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
@@ -20,6 +21,11 @@ function App() {
           Run inside Docker. Work through the exercises to learn React.
         </p>
       </header>
+
+      <section className="cube-row">
+        <RotatingCube label="My Logo" />
+        <RotatingCube label="Second cube" />
+      </section>
 
       <main className="layout">
         <section className="sidebar">
