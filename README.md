@@ -80,6 +80,28 @@ npm run dev
 
 Then open `http://localhost:5173`.
 
+### 7. Running tests
+
+The project uses **Vitest** and **React Testing Library**. Component tests live in `src/test/components/`.
+
+**Single run (CI-friendly):**
+
+```bash
+npm run test:run
+```
+
+**Watch mode (re-runs on file changes):**
+
+```bash
+npm run test
+```
+
+With Docker, run tests inside the container:
+
+```bash
+docker-compose run --rm react-app npm run test:run
+```
+
 ---
 
 You now have a sandbox to learn React. Edit files in `src/`, refresh your browser, break things, and learn by fixing them.
