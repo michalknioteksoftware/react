@@ -5,6 +5,7 @@ import MovieList from "./components/MovieList.jsx";
 import MovieRatingsChart from "./components/MovieRatingsChart.jsx";
 import AddMovieForm from "./components/AddMovieForm.jsx";
 import MovieSearchInput from "./components/MovieSearchInput.jsx";
+import PostsFetcher from "./components/PostsFetcher.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
 import RotatingCube from "./components/RotatingCube.jsx"
@@ -101,6 +102,8 @@ function App() {
           </div>
 
           <AddMovieForm onAddMovie={handleAddMovie} />
+
+          <PostsFetcher />
 
           <div className="tips">
             <h3>Tips</h3>
