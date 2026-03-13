@@ -6,6 +6,7 @@ import MovieRatingsChart from "./components/MovieRatingsChart.jsx";
 import AddMovieForm from "./components/AddMovieForm.jsx";
 import MovieSearchInput from "./components/MovieSearchInput.jsx";
 import PostsFetcher from "./components/PostsFetcher.jsx";
+import Card from "./components/Card.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
 import RotatingCube from "./components/RotatingCube.jsx"
@@ -75,8 +76,7 @@ function App() {
             </p>
           </div>
 
-          <div className="playground">
-            <h3>Example solution for exercise 1</h3>
+          <Card title="Example solution for exercise 1">
             <p>
               Below is a simple component that prints a name and a short bio. You
               can edit <code>src/App.jsx</code> or pass different props to{" "}
@@ -90,16 +90,15 @@ function App() {
               name="Misio Patysio"
               bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus porta justo et lorem cursus."
             />
-          </div>
+          </Card>
 
-          <div className="playground">
-            <h3>Example solution for exercise 3</h3>
+          <Card title="Example solution for exercise 3">
             <p>
               This counter increases by 3 every time you click the button. The
               increment value is passed as a <code>step</code> prop.
             </p>
             <Counter step={3} />
-          </div>
+          </Card>
 
           <AddMovieForm onAddMovie={handleAddMovie} />
 
