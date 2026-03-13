@@ -1,76 +1,94 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const movieSchema = z.object({
+  title: z
+    .string()
+    .min(1, "Title is required.")
+    .max(100, "Title should be at most 100 characters."),
+  description: z
+    .string()
+    .max(500, "Description should be at most 500 characters.")
+    .optional()
+    .or(z.literal("")),
+  releaseDate: z
+    .string()
+    .optional()
+    .or(z.literal("")),
+  rating: z
+    .number({
+      invalid_type_error: "Rating must be a number.",
+    })
+    .min(0, "Rating must be at least 0.")
+    .max(10, "Rating must be at most 10."),
+});
 
 function AddMovieForm({ onAddMovie }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [releaseDate, setReleaseDate] = useState("");
-  const [rating, setRating] = useState("5");
-  const [titleError, setTitleError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(movieSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      releaseDate: "",
+      rating: 5,
+    },
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const values = watch();
 
-    if (!title.trim()) {
-      setTitleError("Title is required.");
-      return;
-    }
-
-    setTitleError("");
-
-    const newMovie = {
-      title: title.trim(),
-      description: description.trim(),
-      releaseDate,
-      rating: Number(rating) || 0,
-    };
-
+  const onSubmit = (data) => {
     if (onAddMovie) {
-      onAddMovie(newMovie);
+      onAddMovie(data);
     }
-
-    setTitle("");
-    setDescription("");
-    setReleaseDate("");
-    setRating("5");
+    reset({
+      title: "",
+      description: "",
+      releaseDate: "",
+      rating: 5,
+    });
   };
 
   return (
     <section className="playground">
       <h3>Example solution for exercise 6</h3>
-      <p>Fill in the form below to practice controlled inputs.</p>
-      <form className="movie-form" onSubmit={handleSubmit}>
+      <p>Fill in the form below to practice controlled inputs with validation.</p>
+      <form className="movie-form" onSubmit={handleSubmit(onSubmit)}>
         <label className="movie-form-field">
           <span>Title</span>
           <input
             type="text"
-            value={title}
-            onChange={(event) => {
-              setTitle(event.target.value);
-              if (event.target.value.trim()) {
-                setTitleError("");
-              }
-            }}
+            {...register("title")}
             placeholder="My new movie"
           />
-          {titleError && <span className="field-error">{titleError}</span>}
+          {errors.title && (
+            <span className="field-error">{errors.title.message}</span>
+          )}
         </label>
 
         <label className="movie-form-field">
           <span>Description</span>
           <textarea
             rows={3}
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            {...register("description")}
             placeholder="Short summary of the movie..."
           />
+          {errors.description && (
+            <span className="field-error">{errors.description.message}</span>
+          )}
         </label>
 
         <label className="movie-form-field">
           <span>Release date</span>
           <input
             type="date"
-            value={releaseDate}
-            onChange={(event) => setReleaseDate(event.target.value)}
+            {...register("releaseDate")}
           />
         </label>
 
@@ -81,9 +99,11 @@ function AddMovieForm({ onAddMovie }) {
             min="0"
             max="10"
             step="0.1"
-            value={rating}
-            onChange={(event) => setRating(event.target.value)}
+            {...register("rating", { valueAsNumber: true })}
           />
+          {errors.rating && (
+            <span className="field-error">{errors.rating.message}</span>
+          )}
         </label>
 
         <button type="submit" className="exercise-button">
@@ -94,16 +114,16 @@ function AddMovieForm({ onAddMovie }) {
       <div className="movie-form-preview">
         <h4>Live preview</h4>
         <p>
-          <strong>Title:</strong> {title || "—"}
+          <strong>Title:</strong> {values.title || "—"}
         </p>
         <p>
-          <strong>Description:</strong> {description || "—"}
+          <strong>Description:</strong> {values.description || "—"}
         </p>
         <p>
-          <strong>Release date:</strong> {releaseDate || "—"}
+          <strong>Release date:</strong> {values.releaseDate || "—"}
         </p>
         <p>
-          <strong>Rating:</strong> {rating || "—"}
+          <strong>Rating:</strong> {values.rating ?? "—"}
         </p>
       </div>
     </section>
