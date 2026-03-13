@@ -102,6 +102,20 @@ With Docker, run tests inside the container:
 docker-compose run --rm react-app npm run test:run
 ```
 
+### 8. Next.js version (server-side rendering)
+
+A Next.js 14 (App Router) version of this app lives in **`next-app/`**. It uses **server-side data fetching** for the Home and Movies pages.
+
+From the `next-app` folder:
+
+```bash
+cd next-app
+npm install
+npm run dev
+```
+
+Then open [http://localhost:3000](http://localhost:3000). See `next-app/README.md` for details.
+
 ---
 
 You now have a sandbox to learn React. Edit files in `src/`, refresh your browser, break things, and learn by fixing them.
