@@ -15,12 +15,14 @@ body {
   margin: 0;
   min-height: 100vh;
   background: radial-gradient(circle at top, #0f172a 0, #020617 55%, #000 100%);
+  transition: background 0.35s ease, color 0.35s ease;
 }
 
 .app {
   max-width: 1120px;
   margin: 0 auto;
   padding: 2rem 1.5rem 3rem;
+  transition: color 0.35s ease;
 }
 
 .app-light {
@@ -43,6 +45,14 @@ body {
   background: #f9fafb;
   border-color: #e5e7eb;
   box-shadow: 0 10px 24px rgba(148, 163, 184, 0.45);
+}
+
+.sidebar,
+.content,
+.playground,
+.card,
+.tips {
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .app-light .sidebar h2 {
@@ -507,10 +517,48 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   gap: 0.75rem;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .movie-list-item-main {
   flex: 1;
+}
+
+/* New movie: fade + slide in */
+.movie-list-item-new {
+  animation: movie-fade-in 0.4s ease-out;
+}
+
+@keyframes movie-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Removing movie: fade + slide out, then removed from DOM */
+.movie-list-item-exiting {
+  animation: movie-fade-out 0.3s ease-in forwards;
+  pointer-events: none;
+}
+
+.movie-list-item-exiting .movie-remove-button {
+  visibility: hidden;
+}
+
+@keyframes movie-fade-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
 }
 
 .movie-remove-button {

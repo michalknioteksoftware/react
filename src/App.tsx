@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import useToggle from "./hooks/useToggle";
 import { useTheme } from "./ThemeContext.jsx";
@@ -8,20 +8,38 @@ import MoviesPage from "./pages/MoviesPage.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
 
+type Movie = (typeof sampleMovies)[number] & { _exiting?: boolean };
+
 function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
   const [isMovieListDark, toggleMovieListDark] = useToggle(true);
   const [showTips, toggleTips] = useToggle(true);
-  const [movies, setMovies] = useState(sampleMovies);
+  const [movies, setMovies] = useState<Movie[]>(sampleMovies);
   const [movieSearch, setMovieSearch] = useState("");
+  const [lastAddedTitle, setLastAddedTitle] = useState<string | null>(null);
+  const addAnimationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { theme } = useTheme() as { theme: { mode: "dark" | "light" } };
 
   const handleAddMovie = useCallback((movie: (typeof sampleMovies)[number]) => {
     setMovies((current) => [...current, movie]);
+    setLastAddedTitle(movie.title);
+    if (addAnimationTimeoutRef.current) clearTimeout(addAnimationTimeoutRef.current);
+    addAnimationTimeoutRef.current = setTimeout(() => setLastAddedTitle(null), 450);
   }, []);
 
-  const handleRemoveMovie = useCallback((movieToRemove: (typeof sampleMovies)[number]) => {
-    setMovies((current) => current.filter((movie) => movie !== movieToRemove));
+  const handleRemoveMovie = useCallback((movieToRemove: Movie) => {
+    if (movieToRemove._exiting) return;
+    setMovies((current) =>
+      current.map((m) =>
+        m === movieToRemove || m.title === movieToRemove.title
+          ? { ...movieToRemove, _exiting: true }
+          : m
+      )
+    );
+  }, []);
+
+  const handleExitComplete = useCallback((movie: Movie) => {
+    setMovies((current) => current.filter((m) => m.title !== movie.title));
   }, []);
 
   return (
@@ -77,6 +95,8 @@ function App() {
                 toggleMovieListDark={toggleMovieListDark}
                 handleAddMovie={handleAddMovie}
                 handleRemoveMovie={handleRemoveMovie}
+                handleExitComplete={handleExitComplete}
+                lastAddedTitle={lastAddedTitle}
               />
             }
           />

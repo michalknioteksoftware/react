@@ -12,6 +12,8 @@ function MoviesPage({
   toggleMovieListDark,
   handleAddMovie,
   handleRemoveMovie,
+  handleExitComplete,
+  lastAddedTitle,
 }) {
   const filteredMovies = useMemo(
     () =>
@@ -19,6 +21,11 @@ function MoviesPage({
         movie.title.toLowerCase().includes(movieSearch.toLowerCase())
       ),
     [movies, movieSearch]
+  );
+
+  const moviesForChart = useMemo(
+    () => filteredMovies.filter((m) => !m._exiting),
+    [filteredMovies]
   );
 
   return (
@@ -45,8 +52,10 @@ function MoviesPage({
       <MovieList
         movies={filteredMovies}
         onRemove={handleRemoveMovie}
+        onExitComplete={handleExitComplete}
+        lastAddedTitle={lastAddedTitle}
       />
-      <MovieRatingsChart movies={filteredMovies} />
+      <MovieRatingsChart movies={moviesForChart} />
     </section>
   );
 }

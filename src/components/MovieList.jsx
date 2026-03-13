@@ -1,13 +1,19 @@
 import { memo } from "react";
 
-function MovieList({ movies, onRemove }) {
+function MovieList({ movies, onRemove, onExitComplete, lastAddedTitle }) {
   const handleRemoveClick = (movie) => {
-    if (!onRemove) return;
+    if (!onRemove || movie._exiting) return;
     const confirmed = window.confirm(
       `Are you sure you want to remove "${movie.title}" from the list?`
     );
     if (confirmed) {
       onRemove(movie);
+    }
+  };
+
+  const handleExitAnimationEnd = (e, movie) => {
+    if (e.animationName === "movie-fade-out" && onExitComplete) {
+      onExitComplete(movie);
     }
   };
 
@@ -23,14 +29,24 @@ function MovieList({ movies, onRemove }) {
       ) : (
         <ul>
           {movies.map((movie) => (
-            <li key={movie.title} className="movie-list-item">
+            <li
+              key={movie.title}
+              className={[
+                "movie-list-item",
+                lastAddedTitle === movie.title && "movie-list-item-new",
+                movie._exiting && "movie-list-item-exiting",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              onAnimationEnd={movie._exiting ? (e) => handleExitAnimationEnd(e, movie) : undefined}
+            >
               <div className="movie-list-item-main">
                 <h4>
                   {movie.title} <span>({movie.releaseDate})</span>
                 </h4>
                 <p>{movie.description}</p>
               </div>
-              {onRemove && (
+              {onRemove && !movie._exiting && (
                 <button
                   type="button"
                   className="movie-remove-button"
