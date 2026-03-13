@@ -184,6 +184,19 @@ body {
   color: #e5e7eb;
 }
 
+.link-button {
+  border: none;
+  background: none;
+  color: #60a5fa;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0 0 0 0.5rem;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
 .movie-form {
   display: flex;
   flex-direction: column;

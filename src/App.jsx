@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useToggle from "./hooks/useToggle";
 import ProfileCard from "./components/ProfileCard.jsx";
 import Counter from "./components/Counter.jsx";
 import MovieList from "./components/MovieList.jsx";
@@ -13,7 +14,8 @@ import RotatingCube from "./components/RotatingCube.jsx"
 
 function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
-  const [isMovieListDark, setIsMovieListDark] = useState(true);
+  const [isMovieListDark, toggleMovieListDark] = useToggle(true);
+  const [showTips, toggleTips] = useToggle(true);
   const [movies, setMovies] = useState(sampleMovies);
   const [movieSearch, setMovieSearch] = useState("");
 
@@ -109,12 +111,23 @@ function App() {
           <PostsFetcher />
 
           <div className="tips">
-            <h3>Tips</h3>
-            <ul>
-              <li>Use small, focused components.</li>
-              <li>Keep state as close as possible to where it is used.</li>
-              <li>Experiment freely — you can always undo with git.</li>
-            </ul>
+            <h3>
+              Tips{" "}
+              <button
+                type="button"
+                className="link-button"
+                onClick={toggleTips}
+              >
+                {showTips ? "hide" : "show"}
+              </button>
+            </h3>
+            {showTips && (
+              <ul>
+                <li>Use small, focused components.</li>
+                <li>Keep state as close as possible to where it is used.</li>
+                <li>Experiment freely — you can always undo with git.</li>
+              </ul>
+            )}
           </div>
         </section>
       </main>
@@ -131,7 +144,7 @@ function App() {
         />
         <button
           type="button"
-          onClick={() => setIsMovieListDark((current) => !current)}
+          onClick={toggleMovieListDark}
         >
           Switch to {isMovieListDark ? "light" : "dark"} mode
         </button>
