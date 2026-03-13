@@ -1,39 +1,9 @@
 import { useState } from "react";
-import ProfileCard from "./ProfileCard.jsx";
-import Counter from "./Counter.jsx";
-
-const exercises = [
-  {
-    id: 1,
-    title: "JSX & Components",
-    description:
-      "Create a new component that renders your name and a short bio.",
-  },
-  {
-    id: 2,
-    title: "Props",
-    description:
-      "Turn the bio into a reusable component that receives data via props.",
-  },
-  {
-    id: 3,
-    title: "State & Events",
-    description:
-      "Add a button that increments a counter and display the value on screen.",
-  },
-  {
-    id: 4,
-    title: "Lists & Keys",
-    description:
-      "Render a list of your favourite movies from an array of objects.",
-  },
-  {
-    id: 5,
-    title: "Conditional Rendering",
-    description:
-      "Show a message only when a piece of state is true (e.g. “Dark mode on”).",
-  },
-];
+import ProfileCard from "./components/ProfileCard.jsx";
+import Counter from "./components/Counter.jsx";
+import MovieList from "./components/MovieList.jsx";
+import { exercises } from "./data/exercises";
+import { sampleMovies } from "./data/sampleMovies";
 
 function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
@@ -124,6 +94,11 @@ function App() {
           </div>
         </section>
       </main>
+
+      <section className="content content-movies">
+        <h2>Example movie list</h2>
+        <MovieList movies={sampleMovies} />
+      </section>
 
       <footer className="footer">
         <span>

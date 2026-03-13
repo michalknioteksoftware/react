@@ -200,6 +200,10 @@ body {
   color: #9ca3af;
 }
 
+.content-movies {
+  margin-top: 1.5rem;
+}
+
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);
