@@ -7,7 +7,6 @@ import HomePage from "./pages/HomePage.jsx";
 import MoviesPage from "./pages/MoviesPage.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
-import RotatingCube from "./components/RotatingCube.jsx"
 
 function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
@@ -15,17 +14,15 @@ function App() {
   const [showTips, toggleTips] = useToggle(true);
   const [movies, setMovies] = useState(sampleMovies);
   const [movieSearch, setMovieSearch] = useState("");
-  const { theme } = useTheme();
+  const { theme } = useTheme() as { theme: { mode: "dark" | "light" } };
 
-  const handleAddMovie = useCallback((movie) => {
+  const handleAddMovie = useCallback((movie: (typeof sampleMovies)[number]) => {
     setMovies((current) => [...current, movie]);
   }, []);
 
-  const handleRemoveMovie = useCallback((movieToRemove) => {
+  const handleRemoveMovie = useCallback((movieToRemove: (typeof sampleMovies)[number]) => {
     setMovies((current) => current.filter((movie) => movie !== movieToRemove));
   }, []);
-
-  const activeExercise = exercises.find((e) => e.id === activeId);
 
   return (
     <Router>
@@ -33,11 +30,18 @@ function App() {
         <header className="app-header">
           <h1>React Learning Lab</h1>
           <p className="subtitle">
-            Run inside Docker. Work through the exercises to learn React. Current
-            theme: <strong>{theme.mode}</strong>
+            Run inside Docker. Work through the exercises to learn React. Current theme:{" "}
+            <strong>{theme.mode}</strong>
           </p>
           <ThemeToggleButton />
-          <nav style={{ marginTop: "0.75rem", display: "flex", gap: "1rem", justifyContent: "center" }}>
+          <nav
+            style={{
+              marginTop: "0.75rem",
+              display: "flex",
+              gap: "1rem",
+              justifyContent: "center",
+            }}
+          >
             <Link to="/">Home</Link>
             <Link to="/movies">Movies</Link>
           </nav>
