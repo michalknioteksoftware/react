@@ -71,5 +71,65 @@ export const exercises = [
     description:
       "Extract a reusable useToggle hook and use it in at least two places (e.g. dark/light toggle).",
   },
+  {
+    id: 13,
+    title: "Routing & Multiple Pages",
+    description:
+      "Add client-side routing (e.g. react-router) and split the app into at least two pages, such as Home and Movies.",
+  },
+  {
+    id: 14,
+    title: "Advanced Forms & Validation",
+    description:
+      "Use a form library (e.g. react-hook-form or Formik) and a validation library (e.g. Yup or Zod) to enhance the AddMovie form.",
+  },
+  {
+    id: 15,
+    title: "Data Fetching with React Query",
+    description:
+      "Install @tanstack/react-query and replace a useEffect-based fetch with a useQuery hook that handles caching and refetching.",
+  },
+  {
+    id: 16,
+    title: "Global State Management",
+    description:
+      "Introduce a global store (Context, Zustand, or Redux Toolkit) to manage shared state like theme or user preferences.",
+  },
+  {
+    id: 17,
+    title: "Performance Optimization",
+    description:
+      "Profile the app and use React.memo, useMemo, and useCallback to avoid unnecessary re-renders in a large list scenario.",
+  },
+  {
+    id: 18,
+    title: "TypeScript with React",
+    description:
+      "Convert at least one component and its props (e.g. MovieList) to TypeScript in a separate branch or small demo project.",
+  },
+  {
+    id: 19,
+    title: "Testing React Components",
+    description:
+      "Use React Testing Library and a test runner (Jest or Vitest) to write tests for key components like AddMovieForm and MovieList.",
+  },
+  {
+    id: 20,
+    title: "Next.js & Server Rendering",
+    description:
+      "Create a small Next.js version of this app with server-side data fetching and a couple of pages.",
+  },
+  {
+    id: 21,
+    title: "Accessibility & UX Improvements",
+    description:
+      "Audit the app for accessibility, add ARIA attributes where needed, and ensure keyboard navigation works everywhere.",
+  },
+  {
+    id: 22,
+    title: "Animations & Transitions",
+    description:
+      "Use CSS transitions or a library like framer-motion to animate adding/removing movies and theme changes.",
+  },
 ];
 
