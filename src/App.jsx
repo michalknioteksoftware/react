@@ -7,6 +7,7 @@ import { sampleMovies } from "./data/sampleMovies";
 
 function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
+  const [isMovieListDark, setIsMovieListDark] = useState(true);
 
   const activeExercise = exercises.find((e) => e.id === activeId);
 
@@ -95,8 +96,18 @@ function App() {
         </section>
       </main>
 
-      <section className="content content-movies">
+      <section
+        className={`content content-movies ${
+          isMovieListDark ? "movies-dark" : "movies-light"
+        }`}
+      >
         <h2>Example movie list</h2>
+        <button
+          type="button"
+          onClick={() => setIsMovieListDark((current) => !current)}
+        >
+          Switch to {isMovieListDark ? "light" : "dark"} mode
+        </button>
         <MovieList movies={sampleMovies} />
       </section>
 

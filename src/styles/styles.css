@@ -204,6 +204,21 @@ body {
   margin-top: 1.5rem;
 }
 
+.movies-light {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  color: #111827;
+}
+
+.movies-light h2 {
+  color: #111827;
+}
+
+.movies-light .movie-list-item h4,
+.movies-light .movie-list-item p {
+  color: #111827;
+}
+
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);
