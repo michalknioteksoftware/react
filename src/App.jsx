@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useToggle from "./hooks/useToggle";
+import { useTheme } from "./ThemeContext.jsx";
 import ProfileCard from "./components/ProfileCard.jsx";
 import Counter from "./components/Counter.jsx";
 import MovieList from "./components/MovieList.jsx";
@@ -8,6 +9,8 @@ import AddMovieForm from "./components/AddMovieForm.jsx";
 import MovieSearchInput from "./components/MovieSearchInput.jsx";
 import PostsFetcher from "./components/PostsFetcher.jsx";
 import Card from "./components/Card.jsx";
+import ThemeToggleButton from "./components/ThemeToggleButton.jsx";
+import CounterWithReducer from "./components/CounterWithReducer.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
 import RotatingCube from "./components/RotatingCube.jsx"
@@ -18,6 +21,7 @@ function App() {
   const [showTips, toggleTips] = useToggle(true);
   const [movies, setMovies] = useState(sampleMovies);
   const [movieSearch, setMovieSearch] = useState("");
+  const { theme } = useTheme();
 
   const handleAddMovie = (movie) => {
     setMovies((current) => [...current, movie]);
@@ -30,12 +34,14 @@ function App() {
   const activeExercise = exercises.find((e) => e.id === activeId);
 
   return (
-    <div className="app">
+    <div className={`app app-${theme.mode}`}>
       <header className="app-header">
         <h1>React Learning Lab</h1>
         <p className="subtitle">
-          Run inside Docker. Work through the exercises to learn React.
+          Run inside Docker. Work through the exercises to learn React. Current
+          theme: <strong>{theme.mode}</strong>
         </p>
+        <ThemeToggleButton />
       </header>
 
       <section className="cube-row">
@@ -98,13 +104,15 @@ function App() {
             />
           </Card>
 
-          <Card title="Example solution for exercise 3">
+          <Card title="Example solution for exercise 3 (useState)">
             <p>
               This counter increases by 3 every time you click the button. The
               increment value is passed as a <code>step</code> prop.
             </p>
             <Counter step={3} />
           </Card>
+
+          <CounterWithReducer />
 
           <AddMovieForm onAddMovie={handleAddMovie} />
 
