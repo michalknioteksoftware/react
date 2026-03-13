@@ -12,7 +12,9 @@ function Counter({ step = 1 }) {
       <button type="button" onClick={handleClick}>
         Click me
       </button>
-      <p>Current counter value: {count}</p>
+      <p>
+        Current counter value: {count > 100 ? "100+" : count}
+      </p>
     </section>
   );
 }
