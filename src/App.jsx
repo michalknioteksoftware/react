@@ -21,6 +21,10 @@ function App() {
     setMovies((current) => [...current, movie]);
   };
 
+  const handleRemoveMovie = (movieToRemove) => {
+    setMovies((current) => current.filter((movie) => movie !== movieToRemove));
+  };
+
   const activeExercise = exercises.find((e) => e.id === activeId);
 
   return (
@@ -135,6 +139,7 @@ function App() {
           movies={movies.filter((movie) =>
             movie.title.toLowerCase().includes(movieSearch.toLowerCase())
           )}
+          onRemove={handleRemoveMovie}
         />
         <MovieRatingsChart
           movies={movies.filter((movie) =>

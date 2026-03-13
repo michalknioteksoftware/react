@@ -342,6 +342,39 @@ body {
   margin-top: 1.25rem;
 }
 
+.movie-list-empty {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+.movie-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.movie-list-item-main {
+  flex: 1;
+}
+
+.movie-remove-button {
+  border-radius: 999px;
+  border: 1px solid rgba(248, 113, 113, 0.8);
+  background: rgba(127, 29, 29, 0.8);
+  color: #fee2e2;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.movie-remove-button:hover {
+  background: rgba(185, 28, 28, 0.95);
+  border-color: rgba(248, 113, 113, 1);
+}
+
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);
