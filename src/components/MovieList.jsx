@@ -14,8 +14,8 @@ function MovieList({ movies, onRemove }) {
   const isEmpty = movies.length === 0;
 
   return (
-    <section className="movie-list">
-      <h3>Sample movie list</h3>
+    <section className="movie-list" aria-labelledby="movie-list-heading">
+      <h3 id="movie-list-heading">Sample movie list</h3>
       {isEmpty ? (
         <p className="movie-list-empty">
           No movies to show yet. Try adding one above or clear the search.
@@ -35,6 +35,7 @@ function MovieList({ movies, onRemove }) {
                   type="button"
                   className="movie-remove-button"
                   onClick={() => handleRemoveClick(movie)}
+                  aria-label={`Remove ${movie.title} from list`}
                 >
                   Remove
                 </button>

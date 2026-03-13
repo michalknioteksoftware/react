@@ -26,8 +26,9 @@ function MoviesPage({
       className={`content content-movies ${
         isMovieListDark ? "movies-dark" : "movies-light"
       }`}
+      aria-labelledby="movies-page-heading"
     >
-      <h2>Example movie list</h2>
+      <h2 id="movies-page-heading">Example movie list</h2>
       <AddMovieForm onAddMovie={handleAddMovie} />
       <MovieSearchInput
         value={movieSearch}
@@ -36,6 +37,8 @@ function MoviesPage({
       <button
         type="button"
         onClick={toggleMovieListDark}
+        aria-pressed={isMovieListDark}
+        aria-label={isMovieListDark ? "Switch list to light mode" : "Switch list to dark mode"}
       >
         Switch to {isMovieListDark ? "light" : "dark"} mode
       </button>

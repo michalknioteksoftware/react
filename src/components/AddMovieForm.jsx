@@ -56,55 +56,71 @@ function AddMovieForm({ onAddMovie }) {
   };
 
   return (
-    <section className="playground">
-      <h3>Example solution for exercise 6</h3>
+    <section className="playground" aria-labelledby="add-movie-heading">
+      <h3 id="add-movie-heading">Example solution for exercise 6</h3>
       <p>Fill in the form below to practice controlled inputs with validation.</p>
-      <form className="movie-form" onSubmit={handleSubmit(onSubmit)}>
-        <label className="movie-form-field">
-          <span>Title</span>
+      <form className="movie-form" onSubmit={handleSubmit(onSubmit)} aria-label="Add a new movie">
+        <div className="movie-form-field">
+          <label htmlFor="movie-title">Title</label>
           <input
+            id="movie-title"
             type="text"
             {...register("title")}
             placeholder="My new movie"
+            aria-invalid={Boolean(errors.title)}
+            aria-describedby={errors.title ? "movie-title-error" : undefined}
           />
           {errors.title && (
-            <span className="field-error">{errors.title.message}</span>
+            <span id="movie-title-error" className="field-error" role="alert">
+              {errors.title.message}
+            </span>
           )}
-        </label>
+        </div>
 
-        <label className="movie-form-field">
-          <span>Description</span>
+        <div className="movie-form-field">
+          <label htmlFor="movie-description">Description</label>
           <textarea
+            id="movie-description"
             rows={3}
             {...register("description")}
             placeholder="Short summary of the movie..."
+            aria-invalid={Boolean(errors.description)}
+            aria-describedby={errors.description ? "movie-description-error" : undefined}
           />
           {errors.description && (
-            <span className="field-error">{errors.description.message}</span>
+            <span id="movie-description-error" className="field-error" role="alert">
+              {errors.description.message}
+            </span>
           )}
-        </label>
+        </div>
 
-        <label className="movie-form-field">
-          <span>Release date</span>
+        <div className="movie-form-field">
+          <label htmlFor="movie-release-date">Release date</label>
           <input
+            id="movie-release-date"
             type="date"
             {...register("releaseDate")}
           />
-        </label>
+        </div>
 
-        <label className="movie-form-field">
-          <span>Rating (0–10)</span>
+        <div className="movie-form-field">
+          <label htmlFor="movie-rating">Rating (0–10)</label>
           <input
+            id="movie-rating"
             type="number"
             min="0"
             max="10"
             step="0.1"
             {...register("rating", { valueAsNumber: true })}
+            aria-invalid={Boolean(errors.rating)}
+            aria-describedby={errors.rating ? "movie-rating-error" : undefined}
           />
           {errors.rating && (
-            <span className="field-error">{errors.rating.message}</span>
+            <span id="movie-rating-error" className="field-error" role="alert">
+              {errors.rating.message}
+            </span>
           )}
-        </label>
+        </div>
 
         <button type="submit" className="exercise-button">
           Add movie

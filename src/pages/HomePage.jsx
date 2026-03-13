@@ -22,9 +22,9 @@ function HomePage({
       </section>
 
       <main className="layout">
-        <section className="sidebar">
-          <h2>Exercises</h2>
-          <ul className="exercise-list">
+        <section className="sidebar" aria-label="Exercise list">
+          <h2 id="exercises-heading">Exercises</h2>
+          <ul className="exercise-list" aria-labelledby="exercises-heading">
             {exercises.map((exercise) => (
               <li key={exercise.id}>
                 <button
@@ -33,6 +33,8 @@ function HomePage({
                   className={
                     exercise.id === activeId ? "exercise-button active" : "exercise-button"
                   }
+                  aria-current={exercise.id === activeId ? "true" : undefined}
+                  aria-label={`Exercise ${exercise.id}: ${exercise.title}`}
                 >
                   <span className="exercise-number">
                     {exercise.id.toString().padStart(2, "0")}
@@ -88,13 +90,16 @@ function HomePage({
 
           <PostsFetcher />
 
-          <div className="tips">
+          <div className="tips" id="tips-content">
             <h3>
               Tips{" "}
               <button
                 type="button"
                 className="link-button"
                 onClick={toggleTips}
+                aria-expanded={showTips}
+                aria-controls="tips-content"
+                aria-label={showTips ? "Hide tips" : "Show tips"}
               >
                 {showTips ? "hide" : "show"}
               </button>

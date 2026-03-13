@@ -149,6 +149,8 @@ function RotatingCube({ label = "React" }) {
       width={260}
       height={220}
       className="cube-canvas"
+      role="img"
+      aria-label={label}
     />
   );
 }

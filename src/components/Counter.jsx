@@ -8,11 +8,15 @@ function Counter({ step = 1 }) {
   };
 
   return (
-    <section className="counter">
-      <button type="button" onClick={handleClick}>
+    <section className="counter" aria-label="Counter">
+      <button
+        type="button"
+        onClick={handleClick}
+        aria-label={`Add ${step} to counter`}
+      >
         Click me
       </button>
-      <p>
+      <p aria-live="polite" aria-atomic="true">
         Current counter value: {count > 100 ? "100+" : count}
       </p>
     </section>

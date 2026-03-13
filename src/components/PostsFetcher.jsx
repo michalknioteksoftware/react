@@ -36,16 +36,18 @@ function PostsFetcher() {
       </p>
 
       {(isLoading || isFetching) && (
-        <p className="loading-row">
+        <p className="loading-row" role="status" aria-live="polite">
           <span className="cog-spinner" aria-hidden="true" />
           <span>Loading posts...</span>
         </p>
       )}
       {isError && (
-        <p className="field-error">Error: {error?.message || "Unknown error"}</p>
+        <p className="field-error" role="alert" aria-live="assertive">
+          Error: {error?.message || "Unknown error"}
+        </p>
       )}
 
-      <button type="button" className="exercise-button" onClick={() => refetch()}>
+      <button type="button" className="exercise-button" onClick={() => refetch()} aria-label="Refetch posts from API">
         Refetch posts
       </button>
 

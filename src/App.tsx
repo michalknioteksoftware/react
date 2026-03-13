@@ -27,6 +27,9 @@ function App() {
   return (
     <Router>
       <div className={`app app-${theme.mode}`}>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <header className="app-header">
           <h1>React Learning Lab</h1>
           <p className="subtitle">
@@ -35,6 +38,7 @@ function App() {
           </p>
           <ThemeToggleButton />
           <nav
+            aria-label="Main navigation"
             style={{
               marginTop: "0.75rem",
               display: "flex",
@@ -47,7 +51,8 @@ function App() {
           </nav>
         </header>
 
-        <Routes>
+        <div id="main-content" tabIndex={-1}>
+          <Routes>
           <Route
             path="/"
             element={
@@ -75,7 +80,8 @@ function App() {
               />
             }
           />
-        </Routes>
+          </Routes>
+        </div>
 
         <footer className="footer">
           <span>

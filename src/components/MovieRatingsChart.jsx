@@ -3,8 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 
 function MovieRatingsChart({ movies }) {
   return (
-    <section className="movie-chart">
-      <h3>Movie ratings chart</h3>
+    <section className="movie-chart" aria-labelledby="movie-chart-heading">
+      <h3 id="movie-chart-heading">Movie ratings chart</h3>
       <ResponsiveContainer width="100%" height={260}>
         <BarChart data={movies} margin={{ top: 16, right: 16, bottom: 8, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#4b5563" />
