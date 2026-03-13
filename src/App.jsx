@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import useToggle from "./hooks/useToggle";
 import { useTheme } from "./ThemeContext.jsx";
@@ -17,13 +17,13 @@ function App() {
   const [movieSearch, setMovieSearch] = useState("");
   const { theme } = useTheme();
 
-  const handleAddMovie = (movie) => {
+  const handleAddMovie = useCallback((movie) => {
     setMovies((current) => [...current, movie]);
-  };
+  }, []);
 
-  const handleRemoveMovie = (movieToRemove) => {
+  const handleRemoveMovie = useCallback((movieToRemove) => {
     setMovies((current) => current.filter((movie) => movie !== movieToRemove));
-  };
+  }, []);
 
   const activeExercise = exercises.find((e) => e.id === activeId);
 

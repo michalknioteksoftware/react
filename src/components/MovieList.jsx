@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function MovieList({ movies, onRemove }) {
   const handleRemoveClick = (movie) => {
     if (!onRemove) return;
@@ -45,5 +47,5 @@ function MovieList({ movies, onRemove }) {
   );
 }
 
-export default MovieList;
+export default memo(MovieList);
 

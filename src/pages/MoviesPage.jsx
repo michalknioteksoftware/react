@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import AddMovieForm from "../components/AddMovieForm.jsx";
 import MovieSearchInput from "../components/MovieSearchInput.jsx";
 import MovieList from "../components/MovieList.jsx";
@@ -12,8 +13,12 @@ function MoviesPage({
   handleAddMovie,
   handleRemoveMovie,
 }) {
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(movieSearch.toLowerCase())
+  const filteredMovies = useMemo(
+    () =>
+      movies.filter((movie) =>
+        movie.title.toLowerCase().includes(movieSearch.toLowerCase())
+      ),
+    [movies, movieSearch]
   );
 
   return (

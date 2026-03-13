@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 function MovieRatingsChart({ movies }) {
@@ -17,5 +18,5 @@ function MovieRatingsChart({ movies }) {
   );
 }
 
-export default MovieRatingsChart;
+export default memo(MovieRatingsChart);
 

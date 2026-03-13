@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function MovieSearchInput({ value, onChange }) {
   return (
     <div className="movie-search-row">
@@ -11,5 +13,5 @@ function MovieSearchInput({ value, onChange }) {
   );
 }
 
-export default MovieSearchInput;
+export default memo(MovieSearchInput);
 
