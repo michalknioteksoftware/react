@@ -4,6 +4,7 @@ import Counter from "./components/Counter.jsx";
 import MovieList from "./components/MovieList.jsx";
 import MovieRatingsChart from "./components/MovieRatingsChart.jsx";
 import AddMovieForm from "./components/AddMovieForm.jsx";
+import MovieSearchInput from "./components/MovieSearchInput.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
 import RotatingCube from "./components/RotatingCube.jsx"
@@ -12,6 +13,7 @@ function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
   const [isMovieListDark, setIsMovieListDark] = useState(true);
   const [movies, setMovies] = useState(sampleMovies);
+  const [movieSearch, setMovieSearch] = useState("");
 
   const handleAddMovie = (movie) => {
     setMovies((current) => [...current, movie]);
@@ -117,14 +119,26 @@ function App() {
         }`}
       >
         <h2>Example movie list</h2>
+        <MovieSearchInput
+          value={movieSearch}
+          onChange={setMovieSearch}
+        />
         <button
           type="button"
           onClick={() => setIsMovieListDark((current) => !current)}
         >
           Switch to {isMovieListDark ? "light" : "dark"} mode
         </button>
-        <MovieList movies={movies} />
-        <MovieRatingsChart movies={movies} />
+        <MovieList
+          movies={movies.filter((movie) =>
+            movie.title.toLowerCase().includes(movieSearch.toLowerCase())
+          )}
+        />
+        <MovieRatingsChart
+          movies={movies.filter((movie) =>
+            movie.title.toLowerCase().includes(movieSearch.toLowerCase())
+          )}
+        />
       </section>
 
       <footer className="footer">
