@@ -3,6 +3,7 @@ import ProfileCard from "./components/ProfileCard.jsx";
 import Counter from "./components/Counter.jsx";
 import MovieList from "./components/MovieList.jsx";
 import MovieRatingsChart from "./components/MovieRatingsChart.jsx";
+import AddMovieForm from "./components/AddMovieForm.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
 import RotatingCube from "./components/RotatingCube.jsx"
@@ -10,6 +11,11 @@ import RotatingCube from "./components/RotatingCube.jsx"
 function App() {
   const [activeId, setActiveId] = useState(exercises[0].id);
   const [isMovieListDark, setIsMovieListDark] = useState(true);
+  const [movies, setMovies] = useState(sampleMovies);
+
+  const handleAddMovie = (movie) => {
+    setMovies((current) => [...current, movie]);
+  };
 
   const activeExercise = exercises.find((e) => e.id === activeId);
 
@@ -92,6 +98,8 @@ function App() {
             <Counter step={3} />
           </div>
 
+          <AddMovieForm onAddMovie={handleAddMovie} />
+
           <div className="tips">
             <h3>Tips</h3>
             <ul>
@@ -115,8 +123,8 @@ function App() {
         >
           Switch to {isMovieListDark ? "light" : "dark"} mode
         </button>
-        <MovieList movies={sampleMovies} />
-        <MovieRatingsChart movies={sampleMovies} />
+        <MovieList movies={movies} />
+        <MovieRatingsChart movies={movies} />
       </section>
 
       <footer className="footer">
