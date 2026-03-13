@@ -219,6 +219,10 @@ body {
   color: #111827;
 }
 
+.movie-chart {
+  margin-top: 1.25rem;
+}
+
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);

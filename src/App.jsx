@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProfileCard from "./components/ProfileCard.jsx";
 import Counter from "./components/Counter.jsx";
 import MovieList from "./components/MovieList.jsx";
+import MovieRatingsChart from "./components/MovieRatingsChart.jsx";
 import { exercises } from "./data/exercises";
 import { sampleMovies } from "./data/sampleMovies";
 
@@ -109,6 +110,7 @@ function App() {
           Switch to {isMovieListDark ? "light" : "dark"} mode
         </button>
         <MovieList movies={sampleMovies} />
+        <MovieRatingsChart movies={sampleMovies} />
       </section>
 
       <footer className="footer">
